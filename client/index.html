@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Delivery</title>
+  <style>* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 5%;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    height: 40px;
+  }
+  
+  nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  nav ul li {
+    margin-right: 20px;
+  }
+  
+  nav ul li:last-child {
+    margin-right: 0;
+  }
+  
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-info img {
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  .user-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .user-details p {
+    margin: 0;
+    color: white;
+  }
+  
+  .featured-restaurants {
+    padding: 20px;
+  }
+  
+  .featured-restaurants h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+  
+  .featured-restaurants ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .featured-restaurants li {
+    width: calc(33.333% - 20px);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .featured-restaurants li img {
+    height: 80px;
+    margin-right: 10px;
+  }
+  
+  .restaurant-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .restaurant-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.restaurant-name {
+  font-size: 24px;
+  margin-top: 0;
+}
+
+.restaurant-address {
+  font-size: 16px;
+  margin-bottom: 0;
+}
+
+.restaurant-distance {
+  font-size: 14px;
+  color: #666;
+}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="logo.svg" alt="Logo" />
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Explore</a></li>
+        <li><a href="#">Favorites</a></li>
+        <li><a href="#">Orders</a></li>
+        <li><a href="#">Messages</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
+    </nav>
+    <div class="user-info">
+      <img src="profile.jpg" alt="Profile" />
+      <div class="user-details">
+        <p>Mark Clarke</p>
+        <p>example@gmail.com</p>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="featured-restaurants">
+      <h2>Featured Restaurants</h2>
+      <ul id="feature_restaurant">
+        <img src="" alt="">
+        <!-- Add more restaurant items as needed -->
+      </ul>
+    </section>
+    <ul>
+      <li>
+        <a href="./detail.html?id=1">res 1</a>
+      </li>
+    </ul>
+    <!-- Add more sections as needed -->
+  </main>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+</html>
