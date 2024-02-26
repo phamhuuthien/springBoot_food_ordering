@@ -11,6 +11,7 @@ import com.IT.osahaneat.payload.Request.FoodRequest;
 import com.IT.osahaneat.services.imp.FileServiceImp;
 import com.IT.osahaneat.services.imp.FoodServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,6 +38,8 @@ public class FoodService implements FoodServiceImp {
 
     @Autowired
     OrderItemRepository orderItemRepository;
+
+    @Cacheable("getAllFood")
     @Override
     public List<FoodDTO> getAllFood() {
         List<Food> listFoods = foodRepository.findAll();

@@ -51,7 +51,7 @@ public class CategoryController {
 
 //    @GetMapping("/clearCache")
 //    @CacheEvict(value = "getCategoryHomePage", allEntries = true)
-//    public String clearCache(){
-//        return "clear cache success";
+//    public String clearCache(String name){
+//        return "clear cache success" + name;
 //    }
 }

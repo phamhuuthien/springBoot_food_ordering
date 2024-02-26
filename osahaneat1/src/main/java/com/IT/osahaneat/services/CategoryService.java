@@ -66,6 +66,7 @@ public class CategoryService implements CategoryServiceImp {
         return listCategoryDTOs;
     }
 
+    @Cacheable("getAllCate")
     @Override
     public List<CategoryResponse> getAllCategory() {
         PageRequest pageRequest = PageRequest.of(0,6, Sort.by("id"));

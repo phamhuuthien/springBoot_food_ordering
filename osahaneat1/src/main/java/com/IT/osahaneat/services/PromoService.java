@@ -7,6 +7,7 @@ import com.IT.osahaneat.entity.Restaurant;
 import com.IT.osahaneat.payload.Request.PromoRequest;
 import com.IT.osahaneat.services.imp.PromoServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class PromoService implements PromoServiceImp {
         return listPromoDTOS;
     }
 
+    @Cacheable("getAllPromo")
     @Override
     public List<PromoDTO> getAll() {
         List<Promo> listPromo = promoRepository.findAll();

@@ -11,6 +11,7 @@ import com.IT.osahaneat.payload.Request.RestaurantUpdateRequest;
 import com.IT.osahaneat.services.imp.FileServiceImp;
 import com.IT.osahaneat.services.imp.RestaurantServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -57,6 +58,7 @@ public class RestaurantService implements RestaurantServiceImp {
         return restaurant;
     }
 
+    @Cacheable("getHomePageRestaurant")
     @Override
     public List<RestaurantDTO> getHomePageRestaurants() {
         List<RestaurantDTO> listRestaurantsDTO = new ArrayList<>();
@@ -86,6 +88,7 @@ public class RestaurantService implements RestaurantServiceImp {
         return listRestaurantsDTO;
     }
 
+    @Cacheable("getAllRestaurant")
     @Override
     public List<Restaurant> getAllRestaurants() {
         List<Restaurant> listRestaurants = new ArrayList<>();
