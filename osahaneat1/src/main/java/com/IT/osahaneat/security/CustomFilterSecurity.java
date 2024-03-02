@@ -75,7 +75,8 @@ public class CustomFilterSecurity {
                                     "/restaurant/admin/**",
                                     "/category/admin/**",
                                     "/order/admin/**",
-                                    "/clearCache/**"
+                                    "/clearCache/**",
+                                    "/redis/**"
                             ).hasRole("ADMIN")
                             .requestMatchers(
                                     "/user/**",

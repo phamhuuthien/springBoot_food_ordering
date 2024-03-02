@@ -2,6 +2,7 @@ package com.IT.osahaneat.services;
 
 import com.IT.osahaneat.Keys.KeyOrderItem;
 import com.IT.osahaneat.Responsitory.*;
+import com.IT.osahaneat.dto.CategoryDTO;
 import com.IT.osahaneat.dto.FoodDTO;
 import com.IT.osahaneat.entity.Category;
 import com.IT.osahaneat.entity.Food;
@@ -10,11 +11,16 @@ import com.IT.osahaneat.entity.Orders;
 import com.IT.osahaneat.payload.Request.FoodRequest;
 import com.IT.osahaneat.services.imp.FileServiceImp;
 import com.IT.osahaneat.services.imp.FoodServiceImp;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,22 +45,37 @@ public class FoodService implements FoodServiceImp {
     @Autowired
     OrderItemRepository orderItemRepository;
 
-    @Cacheable("getAllFood")
+    @Autowired
+    RedisTemplate redisTemplate;
+
+    private Gson gson = new GsonBuilder().serializeNulls().create();
+//    @Cacheable("getAllFood")
     @Override
     public List<FoodDTO> getAllFood() {
         List<Food> listFoods = foodRepository.findAll();
         List<FoodDTO> listFoodDTOs = new ArrayList<>();
-        for(Food food: listFoods){
-            FoodDTO foodDTO = new FoodDTO();
-            foodDTO.setId(food.getId());
-            foodDTO.setTitle(food.getTitle());
-            foodDTO.setImage(food.getImage());
-            foodDTO.setTimeShip(food.getTimeShip());
-            foodDTO.setIsFreeship(food.getIsFreeship());
-            foodDTO.setPrice(food.getPrice());
-            foodDTO.setCateName(food.getCategory().getNameCate());
-            listFoodDTOs.add(foodDTO);
+        String redisData = (String) redisTemplate.opsForValue().get("foodAll");
+
+        if(redisData== null){
+            for(Food food: listFoods){
+                FoodDTO foodDTO = new FoodDTO();
+                foodDTO.setId(food.getId());
+                foodDTO.setTitle(food.getTitle());
+                foodDTO.setImage(food.getImage());
+                foodDTO.setTimeShip(food.getTimeShip());
+                foodDTO.setIsFreeship(food.getIsFreeship());
+                foodDTO.setPrice(food.getPrice());
+                foodDTO.setCateName(food.getCategory().getNameCate());
+                listFoodDTOs.add(foodDTO);
+            }
+            String dataJson = gson.toJson(listFoodDTOs);
+
+            redisTemplate.opsForValue().set("foodAll",dataJson);
+        }else {
+            Type listType = new TypeToken<List<CategoryDTO>>() {}.getType();
+            listFoodDTOs= gson.fromJson(redisData,listType);
         }
+
         return listFoodDTOs;
     }
 
